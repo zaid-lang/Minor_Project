@@ -44,25 +44,15 @@ def packet_handler(packet):
             print(f"{ip} -> {count} packets")
 
             if count > threshold:
-    excess = count - threshold
-
-    if count <= threshold * 1.2:
-        severity = "LOW"
-    elif count <= threshold * 1.5:
-        severity = "MEDIUM"
-    else:
-        severity = "HIGH"
-
-    print(
-        f"⚠️ ALERT: Abnormal traffic detected\n"
-        f"   Severity        : {severity}\n"
-        f"   Source IP       : {ip}\n"
-        f"   Packet Count    : {count}\n"
-        f"   Adaptive Limit  : {int(threshold)}\n"
-        f"   Excess Packets  : {int(excess)}\n"
-        f"   Reason          : Packet rate exceeded adaptive threshold\n"
-    )
-
+                excess = count - threshold
+                print(
+                    f"⚠️ ALERT: Abnormal traffic detected\n"
+                    f"   Source IP       : {ip}\n"
+                    f"   Packet Count    : {count}\n"
+                    f"   Adaptive Limit  : {int(threshold)}\n"
+                    f"   Excess Packets  : {int(excess)}\n"
+                    f"   Reason          : Packet rate exceeded adaptive threshold\n"
+                )
 
         print("---------------------------------\n")
 
@@ -72,4 +62,3 @@ def packet_handler(packet):
 
 print("Starting adaptive real-time intrusion detection...")
 sniff(filter="ip", prn=packet_handler, store=False)
-
